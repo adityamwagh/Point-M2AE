@@ -8,7 +8,28 @@ import torch.nn.functional as F
 import os
 from collections import abc
 from pointnet2_ops import pointnet2_utils
+import open3d as o3d
 
+def to_array(tensor):
+    """
+    Conver tensor to array
+    """
+    if not isinstance(tensor, np.ndarray):
+        if tensor.device == torch.device("cpu"):
+            return tensor.numpy()
+        else:
+            return tensor.cpu().numpy()
+    else:
+        return tensor
+    
+def to_o3d_pcd(xyz):
+    """
+    Convert tensor/array to open3d PointCloud
+    xyz:       [N, 3]
+    """
+    pcd = o3d.geometry.PointCloud()
+    pcd.points = o3d.utility.Vector3dVector(to_array(xyz))
+    return pcd
 
 def fps(data, number):
     '''
