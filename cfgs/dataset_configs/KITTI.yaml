@@ -1,0 +1,4 @@
+NAME: KITTI
+DATA_PATH: /home/aditya/dataset/
+N_POINTS: 8192
+PC_PATH: /home/aditya/dataset/sequences/
